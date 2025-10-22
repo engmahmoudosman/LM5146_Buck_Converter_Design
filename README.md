@@ -1,7 +1,6 @@
 # LM5146 Buck Converter PCB Design Documentation   
 **Author:** Mahmoud Esameldin Osman  
 **Date:** 14.01.2025  
- 
 
 ---
 
@@ -30,78 +29,70 @@ To correctly implement the schematic, the **Application Circuit 2** from the LM5
 ### Inductor
 
 **Equation 1:**  
-\[
-L_F = \frac{V_{OUT}}{V_{IN}} \times \frac{(V_{IN} - V_{OUT})}{f_{sw} \times \Delta I_L}
-\]
+`L_F = (V_OUT / V_IN) × ((V_IN - V_OUT) / (f_sw × ΔI_L))`
 
-Given:
-- \(V_{IN} = 48V\)
-- \(V_{OUT} = 12V\)
-- \(f_{sw} = 400kHz\)
-- \(I_{MAX} = 6A\)
-- \(\Delta I_L = 0.2 \times I_{MAX}\)
+**Given:**
+- V_IN = 48 V  
+- V_OUT = 12 V  
+- f_sw = 400 kHz  
+- I_MAX = 6 A  
+- ΔI_L = 0.2 × I_MAX  
 
-\[
-L_F = 18µH
-\]
+**Result:**  
+`L_F = 18 µH`
 
 ---
 
 ### Output Capacitor (COUT)
 
 **Equation 2:**  
-\[
-C_{OUT} = \frac{\Delta I_L}{8 \times f_{sw} \times \sqrt{(\Delta V_{OUT})^2}}
-\]
+`C_OUT = ΔI_L / (8 × f_sw × (ΔV_OUT)²)`
 
-Given:
-- \(\Delta V_{OUT} = 0.01 \times V_{OUT}\)
+**Given:**  
+- ΔV_OUT = 0.01 × V_OUT  
 
-\[
-C_{OUT} = 3.12µF
-\]
+**Result:**  
+`C_OUT = 3.12 µF`
 
-Because ceramic capacitor ESR is negligible, it was ignored.  
-To meet the ripple spec (2% of max output current), a higher value was selected:  
-**COUT = 3 × 22µF**
+Because the ceramic capacitor ESR is negligible, it was ignored.  
+To meet the ripple specification (2 % of max output current), a higher value was selected:  
+**COUT = 3 × 22 µF**
 
 ---
 
 ### Input Capacitor (CIN)
 
 **Equation 3:**  
-\[
-C_{IN} = \frac{D (1-D) I_{MAX}}{f_{sw} \times \Delta V_{IN}}
-\]
+`C_IN = (D × (1 – D) × I_MAX) / (f_sw × ΔV_IN)`
 
-Given:
-- \(D = 0.5\)
-- \(\Delta V_{IN} = 0.01 \times V_{IN}\)
+**Given:**  
+- D = 0.5  
+- ΔV_IN = 0.01 × V_IN  
 
-\[
-C_{IN} = 7.81µF
-\]
+**Result:**  
+`C_IN = 7.81 µF`
 
-Used:
-- 4 × 4.7µF  
-- 2 × 10nF  
-- 2 × 100nF (decoupling capacitors)  
-All X7R type for low impedance and high RMS current.
+**Used components:**  
+- 4 × 4.7 µF  
+- 2 × 10 nF  
+- 2 × 100 nF (decoupling capacitors)  
+
+All capacitors are **X7R** rated to provide low impedance and high RMS current rating over a wide temperature range.
 
 ---
 
 ### Other Components
 
-Using TI’s **Quickstart Design Calculator**, values of RUV1 and RUV2 were selected.
+Using TI’s **Quickstart Design Calculator**, values of *RUV1* and *RUV2* were selected.  
 
-- **RRT = 24.9kΩ** for 400kHz switching frequency (per datasheet Table 8-1).  
-- Added **2.2Ω resistor** in series with the boot capacitor to reduce voltage ringing and peak amplitude at the SW node.
+- **RRT = 24.9 kΩ** for 400 kHz switching frequency (per datasheet Table 8-1).  
+- Added a **2.2 Ω resistor** in series with the boot capacitor to reduce voltage ringing and peak amplitude at the SW node.
 
 ---
 
 ## Schematic Design
 
-The schematic uses **EN-60617 standard** circuit symbols.  
+The schematic uses **EN-60617** standard circuit symbols.  
 Seven test points were added for measurement and debugging.
 
 | Test Point | Net Label |
@@ -114,7 +105,8 @@ Seven test points were added for measurement and debugging.
 | TP6 | SW |
 | TP7 | GND |
 
-*(Refer to Figure 3 in the PDF for the full schematic.)*
+### Application Circuit
+![Application Circuit](images/app_circuit.jpg)
 
 ---
 
@@ -122,8 +114,8 @@ Seven test points were added for measurement and debugging.
 
 The PCB layout is based on the LM5146-Q1 datasheet guidelines, using **copper-filled polygon areas** for power routing and **tracks for signals**.
 
-- **Minimum clearance:** 0.6mm for HV nets, 0.15mm for others (per IPC-2221B).  
-- **Layer stack-up:** 8 layers (chosen due to lower production cost at Eurocircuits).
+- **Minimum clearance:** 0.6 mm for HV nets, 0.15 mm for others (per IPC-2221B).  
+- **Layer stack-up:** 8 layers (chosen for lower production cost at Eurocircuits).
 
 ### Polygon Pours
 
@@ -138,26 +130,26 @@ The PCB layout is based on the LM5146-Q1 datasheet guidelines, using **copper-fi
 | 7 | Power (GND) |
 | 8 | Signals and Power (GND) |
 
-*(Refer to Figures 4–14 in the PDF for visual layout and pours.)*
+### PCB Overview
+![DC-DC Converter PCB Layout](images/dcdc_conv.jpeg)
 
 ---
 
 ## Price Analysis
 
 Using **Eurocircuits PCB manufacturer** pricing tool:  
-- **Board size:** 65mm × 40mm  
+- **Board size:** 65 mm × 40 mm  
 - **Cost estimate:** €201.70 for one board  
+
+![PCB Price Analysis](images/pcbprice.jpeg)
 
 ---
 
 ## 3D PCB Views
 
-The final PCB was visualized in 3D, showing:
-- **Top View**
-- **Bottom View**
-- **Custom Perspective**
+The final PCB visualized in 3D:
 
-*(Refer to Figures 15–17 in the PDF for 3D renders.)*
+![3D PCB View](images/converter_3dview.png)
 
 ---
 
