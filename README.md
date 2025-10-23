@@ -90,10 +90,10 @@ Using TI’s **Quickstart Design Calculator**, values of *RUV1* and *RUV2* were 
 
 ---
 
-## Schematic Design
+## Test Points
 
 The schematic uses **EN-60617** standard circuit symbols.  
-Seven test points were added for measurement and debugging.
+Seven test points were added for measurement, debugging functionality verification.
 
 | Test Point | Net Label |
 |-------------|------------|
@@ -130,7 +130,7 @@ The PCB layout is based on the LM5146-Q1 datasheet guidelines, using **copper-fi
 | 7 | Power (GND) |
 | 8 | Signals and Power (GND) |
 
-### Schematic Desgin:
+### Schematic Design:
 ![DC-DC Converter PCB Layout](images/dcdc_conv.jpeg)
 
 ---
