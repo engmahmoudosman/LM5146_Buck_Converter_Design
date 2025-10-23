@@ -130,7 +130,7 @@ The PCB layout is based on the LM5146-Q1 datasheet guidelines, using **copper-fi
 | 7 | Power (GND) |
 | 8 | Signals and Power (GND) |
 
-### PCB Overview
+### Schematic Desgin:
 ![DC-DC Converter PCB Layout](images/dcdc_conv.jpeg)
 
 ---
